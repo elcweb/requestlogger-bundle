@@ -37,13 +37,25 @@ class RecordRequestListener
      */
     public function onKernelTerminate(PostResponseEvent $event)
     {
-        $username = null;
-        if ($this->tokenStorage->getToken()) {
-            $username = $this->tokenStorage->getToken()->getUser()->getUsername();
-        }
-
-        $request = new Request($event->getRequest(), $event->getResponse(), $username);
+        $request = new Request($event->getRequest(), $event->getResponse(), $this->getUsername());
         $this->entityManager->persist($request);
         $this->entityManager->flush();
+    }
+
+    /**
+     * Return the current User username or null if the username is unavailable
+     * 
+     * @return string|null
+     */
+    private function getUsername()
+    {
+        $token = $this->tokenStorage->getToken();
+        if ($token && $token->getUser()) {
+            if (method_exists($token->getUser(), 'getUsername')) {
+                return $token->getUser()->getUsername();
+            }
+        }
+
+        return null;
     }
 }
