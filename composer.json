@@ -1,0 +1,24 @@
+{
+    "name": "elcweb/requestlogger-bundle",
+    "type": "symfony-bundle",
+    "description": "Record Request/Response/User in a table",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Etienne Lachance",
+            "email": "el@elcweb.ca"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/framework-bundle": ">=2.7,<3.0-dev"
+    },
+    "suggest": {
+        "doctrine/doctrine-migrations-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Elcweb\\RequestLoggerBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Elcweb/RequestLoggerBundle"
+}
