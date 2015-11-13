@@ -5,6 +5,4 @@ services:
             - "@security.token_storage"
             - "@doctrine.orm.entity_manager"
         tags:
-#            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
             - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
-            #- { name: kernel.event_subscriber }

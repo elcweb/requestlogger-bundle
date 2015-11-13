@@ -33,31 +33,16 @@ class RecordRequestListener
     }
 
     /**
-     * @param GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-        $user = null;
-        if ($this->tokenStorage->getToken()) {
-            $user = $this->tokenStorage->getToken()->getUser();
-        }
-
-        $request = new Request($event->getRequest(), $user);
-        $this->entityManager->persist($request);
-        $this->entityManager->flush();
-    }
-
-    /**
      * @param PostResponseEvent $event
      */
     public function onKernelTerminate(PostResponseEvent $event)
     {
-        $user = null;
+        $username = null;
         if ($this->tokenStorage->getToken()) {
-            $user = $this->tokenStorage->getToken()->getUser();
+            $username = $this->tokenStorage->getToken()->getUser()->getUsername();
         }
 
-        $request = new Request($event->getRequest(), $event->getResponse(), $user);
+        $request = new Request($event->getRequest(), $event->getResponse(), $username);
         $this->entityManager->persist($request);
         $this->entityManager->flush();
     }

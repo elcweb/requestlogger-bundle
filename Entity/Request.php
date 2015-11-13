@@ -45,22 +45,22 @@ class Request
 
     /**
      * @var object
-     * @ORM\Column(type="object")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $user;
+    protected $username;
 
     /**
      * Request constructor.
      *
      * @param SymfonyRequest     $request
      * @param Response           $response
-     * @param UserInterface|null $user
+     * @param string|null        $username
      */
-    public function __construct(SymfonyRequest $request, Response $response, UserInterface $user = null)
+    public function __construct(SymfonyRequest $request, Response $response, $username = null)
     {
         $this->request = $request;
         $this->response = $response;
-        $this->user = $user;
+        $this->username = $username;
     }
 
     /**
@@ -82,5 +82,10 @@ class Request
     public function getResponse()
     {
         return $this->response;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
     }
 }
