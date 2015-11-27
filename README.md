@@ -1,4 +1,4 @@
-KeyValueStoreBundle
+ElcwebRequestLoggerBundle
 ===================
 
 [![Latest Stable Version](https://poser.pugx.org/elcweb/requestlogger-bundle/v/stable.png)](https://packagist.org/packages/elcweb/requestlogger-bundle)
