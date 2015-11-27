@@ -4,7 +4,6 @@ namespace Elcweb\RequestLoggerBundle\Listener;
 
 use Doctrine\ORM\EntityManager;
 use Elcweb\RequestLoggerBundle\Entity\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -38,6 +37,7 @@ class RecordRequestListener
     public function onKernelTerminate(PostResponseEvent $event)
     {
         $request = new Request($event->getRequest(), $event->getResponse(), $this->getUsername());
+
         $this->entityManager->persist($request);
         $this->entityManager->flush();
     }

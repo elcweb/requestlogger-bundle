@@ -5,6 +5,7 @@ namespace Elcweb\RequestLoggerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JMS\Serializer\Annotation as Serializer;
+use MyProject\Proxies\__CG__\stdClass;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -44,23 +45,30 @@ class Request
     protected $response;
 
     /**
-     * @var object
+     * @var string
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $username;
+    protected $username = 'anonymous';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $uri;
 
     /**
      * Request constructor.
      *
-     * @param SymfonyRequest     $request
-     * @param Response           $response
-     * @param string|null        $username
+     * @param        $request
+     * @param        $response
+     * @param string $username
      */
-    public function __construct(SymfonyRequest $request, Response $response, $username = null)
+    public function __construct(SymfonyRequest $request, Response $response, $username = 'anonymous')
     {
         $this->request = $request;
         $this->response = $response;
         $this->username = $username;
+        $this->uri = $request->getRequestUri();
     }
 
     /**
@@ -72,7 +80,7 @@ class Request
     }
 
     /**
-     * @return string
+     * @return object
      */
     public function getRequest()
     {

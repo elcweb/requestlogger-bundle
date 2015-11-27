@@ -17,7 +17,7 @@ class Version20151113094341 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE Requests (id INT UNSIGNED AUTO_INCREMENT NOT NULL, request LONGTEXT NOT NULL COMMENT \'(DC2Type:object)\', response LONGTEXT NOT NULL COMMENT \'(DC2Type:object)\', user LONGTEXT NOT NULL COMMENT \'(DC2Type:object)\', createdAt DATETIME NOT NULL, updatedAt DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE Requests (id INT UNSIGNED AUTO_INCREMENT NOT NULL, request LONGTEXT NOT NULL COMMENT \'(DC2Type:object)\', response LONGTEXT NOT NULL COMMENT \'(DC2Type:object)\', username VARCHAR(255) NULL, uri VARCHAR(255) NULL, createdAt DATETIME NOT NULL, updatedAt DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
     }
 
     /**
